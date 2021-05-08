@@ -26,9 +26,6 @@ ext {
     ws_rs_version = "2.1.1"
 }
 
-//project properties
-version = '0.1-RELEASE'
-group = 'io.github.lumue'
 
 dependencies {
     compile "io.swagger:swagger-annotations:$swagger_annotations_version"
