@@ -1,0 +1,236 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- description: Generated server url
+  url: http://vm-services-media:8090
+paths:
+  /resolve:
+    get:
+      operationId: resolveMetadataforUrlInPath
+      parameters:
+      - explode: true
+        in: query
+        name: url
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieMetadata'
+          description: OK
+      tags:
+      - resolve-controller
+      x-accepts: application/json
+  /:
+    get:
+      operationId: resolveMetadataforUrlInBody
+      parameters:
+      - explode: true
+        in: query
+        name: url
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieMetadata'
+          description: OK
+      tags:
+      - resolve-controller
+      x-accepts: application/json
+components:
+  schemas:
+    Actor:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    MovieMetadata:
+      example:
+        sourceId: sourceId
+        description: description
+        source: source
+        title: title
+        downloaded: 2000-01-23T04:56:07.000+00:00
+        resolution: 2
+        tags:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        duration:
+          zero: true
+          seconds: 0
+          negative: true
+          nano: 6
+          units:
+          - duration:
+              zero: true
+              seconds: 1
+              negative: true
+              nano: 5
+            durationEstimated: true
+            timeBased: true
+            dateBased: true
+          - duration:
+              zero: true
+              seconds: 1
+              negative: true
+              nano: 5
+            durationEstimated: true
+            timeBased: true
+            dateBased: true
+        sourceURL: sourceURL
+        actors:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        uploader: uploader
+        uploaded: 2000-01-23T04:56:07.000+00:00
+        votes: 7
+        views: 5
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/Tag'
+          type: array
+          uniqueItems: true
+        actors:
+          items:
+            $ref: '#/components/schemas/Actor'
+          type: array
+          uniqueItems: true
+        duration:
+          $ref: '#/components/schemas/MovieMetadata_duration'
+        views:
+          format: int32
+          type: integer
+        downloaded:
+          format: date-time
+          type: string
+        uploaded:
+          format: date-time
+          type: string
+        uploader:
+          type: string
+        source:
+          type: string
+        sourceId:
+          type: string
+        sourceURL:
+          type: string
+        resolution:
+          format: int32
+          type: integer
+        votes:
+          format: int32
+          type: integer
+      type: object
+    Tag:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    MovieMetadata_duration_duration:
+      example:
+        zero: true
+        seconds: 1
+        negative: true
+        nano: 5
+      properties:
+        seconds:
+          format: int64
+          type: integer
+        zero:
+          type: boolean
+        negative:
+          type: boolean
+        nano:
+          format: int32
+          type: integer
+      type: object
+    MovieMetadata_duration_units:
+      example:
+        duration:
+          zero: true
+          seconds: 1
+          negative: true
+          nano: 5
+        durationEstimated: true
+        timeBased: true
+        dateBased: true
+      properties:
+        duration:
+          $ref: '#/components/schemas/MovieMetadata_duration_duration'
+        dateBased:
+          type: boolean
+        timeBased:
+          type: boolean
+        durationEstimated:
+          type: boolean
+      type: object
+    MovieMetadata_duration:
+      example:
+        zero: true
+        seconds: 0
+        negative: true
+        nano: 6
+        units:
+        - duration:
+            zero: true
+            seconds: 1
+            negative: true
+            nano: 5
+          durationEstimated: true
+          timeBased: true
+          dateBased: true
+        - duration:
+            zero: true
+            seconds: 1
+            negative: true
+            nano: 5
+          durationEstimated: true
+          timeBased: true
+          dateBased: true
+      properties:
+        seconds:
+          format: int64
+          type: integer
+        zero:
+          type: boolean
+        negative:
+          type: boolean
+        nano:
+          format: int32
+          type: integer
+        units:
+          items:
+            $ref: '#/components/schemas/MovieMetadata_duration_units'
+          type: array
+      type: object
+
